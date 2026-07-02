@@ -1657,12 +1657,13 @@ function initRegionMap(regionName) {
   function px(s) { return s.cx * W; }
   function py(s) { return s.cy * H; }
 
-  // ── BG – transparent & gold ──
   function drawBg() {
     ctx.clearRect(0, 0, W, H);
+    ctx.fillStyle = '#F6EFDD';
+    ctx.fillRect(0, 0, W, H);
 
-    ctx.strokeStyle = 'rgba(191,149,63,0.08)';
-    ctx.lineWidth = 0.5;
+    ctx.strokeStyle = 'rgba(184,134,59,0.055)';
+    ctx.lineWidth = 0.6;
     for (let x = 0; x <= W; x += 50) { ctx.beginPath(); ctx.moveTo(x,0); ctx.lineTo(x,H); ctx.stroke(); }
     for (let y = 0; y <= H; y += 50) { ctx.beginPath(); ctx.moveTo(0,y); ctx.lineTo(W,y); ctx.stroke(); }
 
@@ -1675,44 +1676,48 @@ function initRegionMap(regionName) {
     ];
     shape.forEach(([x,y],i) => i===0 ? ctx.moveTo(x*W,y*H) : ctx.lineTo(x*W,y*H));
     ctx.closePath();
-    ctx.fillStyle = 'rgba(191,149,63,0.02)';
+    ctx.fillStyle = 'rgba(184,134,59,0.045)';
     ctx.fill();
-    ctx.strokeStyle = 'rgba(191,149,63,0.25)';
+    ctx.strokeStyle = 'rgba(184,134,59,0.16)';
     ctx.lineWidth = 1;
     ctx.stroke();
 
-    const cx2 = W - 44, cy2 = H - 44;
-    ctx.strokeStyle = 'rgba(191,149,63,0.2)';
+    const cx2 = W - 52, cy2 = H - 72;
+    ctx.strokeStyle = 'rgba(184,134,59,0.22)';
     ctx.lineWidth = 0.7;
     for (let a = 0; a < 8; a++) {
       const ang = (a * Math.PI) / 4;
       ctx.beginPath();
       ctx.moveTo(cx2, cy2);
-      ctx.lineTo(cx2 + Math.cos(ang) * 14, cy2 + Math.sin(ang) * 14);
+      ctx.lineTo(cx2 + Math.cos(ang) * 18, cy2 + Math.sin(ang) * 18);
       ctx.stroke();
     }
-    ctx.fillStyle = 'rgba(191,149,63,0.4)';
-    ctx.font = '500 8px Inter, sans-serif';
+    ctx.fillStyle = 'rgba(154,108,42,0.55)';
+    ctx.font = '500 9px Inter, sans-serif';
     ctx.textAlign = 'center';
-    ctx.fillText('N', cx2, cy2 - 20);
+    ctx.fillText('N', cx2, cy2 - 24);
     ctx.textAlign = 'left';
 
-    ctx.fillStyle = 'rgba(191,149,63,0.15)';
-    ctx.font = '400 8px Inter, sans-serif';
-    ctx.fillText(routeData.subtitle, 20, H - 40);
+    ctx.fillStyle = 'rgba(154,108,42,0.32)';
+    ctx.font = '400 9px Inter, sans-serif';
+    ctx.fillText(routeData.subtitle, 24, H - 40);
   }
 
-  const CURVES = STOPS.slice(0,-1).map((s, i) => {
-    const a = s, b = STOPS[i+1];
+  let CURVES = [];
+  function rebuildCurves() {
     const offsets = [[-22,12],[18,-8],[-16,10],[14,-12],[-20,8]];
-    const [ox, oy] = offsets[i] || [0,0];
-    return {
-      ax: px(a), ay: py(a),
-      bx: px(b), by: py(b),
-      mx: (px(a)+px(b))/2 + ox,
-      my: (py(a)+py(b))/2 + oy
-    };
-  });
+    CURVES = STOPS.slice(0,-1).map((s, i) => {
+      const a = s, b = STOPS[i+1];
+      const [ox, oy] = offsets[i] || [0,0];
+      return {
+        ax: px(a), ay: py(a),
+        bx: px(b), by: py(b),
+        mx: (px(a)+px(b))/2 + ox,
+        my: (py(a)+py(b))/2 + oy
+      };
+    });
+  }
+  rebuildCurves();
 
   function bezier(c, t) {
     return [
@@ -1721,28 +1726,36 @@ function initRegionMap(regionName) {
     ];
   }
 
+  function drawSmoothPath(c, fromT, toT, step) {
+    ctx.beginPath();
+    const [sx, sy] = bezier(c, fromT);
+    ctx.moveTo(sx, sy);
+    for (let t = fromT; t <= toT; t += step) {
+      const [x, y] = bezier(c, t);
+      ctx.lineTo(x, y);
+    }
+    const [ex, ey] = bezier(c, toT);
+    ctx.lineTo(ex, ey);
+  }
+
   function drawRoute(segsDone, partialT) {
     for (let i = 0; i < segsDone; i++) {
       const c = CURVES[i];
-      ctx.beginPath();
-      ctx.moveTo(c.ax, c.ay);
-      for (let t = 0; t <= 1; t += 0.02) {
-        const [x, y] = bezier(c, t);
-        ctx.lineTo(x, y);
-      }
+      drawSmoothPath(c, 0, 1, 0.008);
       ctx.setLineDash([5, 5]);
-      ctx.strokeStyle = '#BF953F';
-      ctx.lineWidth = 1.2;
+      ctx.strokeStyle = 'rgba(184,134,59,0.7)';
+      ctx.lineWidth = 1.5;
+      ctx.lineCap = 'round';
       ctx.stroke();
       ctx.setLineDash([]);
 
       const [ix, iy] = bezier(c, 0.55);
-      ctx.save();
       const [ix2, iy2] = bezier(c, 0.57);
       const ang = Math.atan2(iy2-iy, ix2-ix);
+      ctx.save();
       ctx.translate(ix, iy);
       ctx.rotate(ang);
-      ctx.fillStyle = '#BF953F';
+      ctx.fillStyle = 'rgba(154,108,42,0.6)';
       ctx.font = '10px sans-serif';
       ctx.fillText('✈', -5, 4);
       ctx.restore();
@@ -1750,15 +1763,11 @@ function initRegionMap(regionName) {
 
     if (segsDone < CURVES.length && partialT > 0) {
       const c = CURVES[segsDone];
-      ctx.beginPath();
-      ctx.moveTo(c.ax, c.ay);
-      for (let t = 0; t <= partialT; t += 0.02) {
-        const [x, y] = bezier(c, t);
-        ctx.lineTo(x, y);
-      }
+      drawSmoothPath(c, 0, partialT, 0.008);
       ctx.setLineDash([5, 5]);
-      ctx.strokeStyle = '#D4AF6A';
-      ctx.lineWidth = 1.2;
+      ctx.strokeStyle = 'rgba(184,134,59,0.4)';
+      ctx.lineWidth = 1.5;
+      ctx.lineCap = 'round';
       ctx.stroke();
       ctx.setLineDash([]);
     }
@@ -1768,26 +1777,26 @@ function initRegionMap(regionName) {
     for (let i = 0; i < count; i++) {
       const s = STOPS[i];
       const isLast = i === count - 1;
-      const isDelphi2 = s.id === 'delhi2';
-      if (isDelphi2 && count > 1) continue;
+      const isDelhi2 = s.id === 'delhi2';
+      if (isDelhi2 && count > 1) continue;
 
-      const r = isLast ? 6 : 4;
+      const r = isLast ? 9 : 5;
       ctx.beginPath();
       ctx.arc(px(s), py(s), r, 0, Math.PI*2);
-      ctx.fillStyle = isLast ? '#BF953F' : '#D4AF6A';
+      ctx.fillStyle = isLast ? '#B8863B' : 'rgba(184,134,59,0.55)';
       ctx.fill();
-      ctx.strokeStyle = '#fff';
-      ctx.lineWidth = 1.5;
+      ctx.strokeStyle = '#F6EFDD';
+      ctx.lineWidth = 2;
       ctx.stroke();
 
       if (isLast) {
         ctx.beginPath();
-        ctx.arc(px(s), py(s), 12, 0, Math.PI*2);
+        ctx.arc(px(s), py(s), 14, 0, Math.PI*2);
         ctx.strokeStyle = 'rgba(191,149,63,0.5)';
         ctx.lineWidth = 1;
         ctx.stroke();
         ctx.beginPath();
-        ctx.arc(px(s), py(s), 18, 0, Math.PI*2);
+        ctx.arc(px(s), py(s), 20, 0, Math.PI*2);
         ctx.strokeStyle = 'rgba(191,149,63,0.2)';
         ctx.lineWidth = 1;
         ctx.stroke();
@@ -1796,18 +1805,38 @@ function initRegionMap(regionName) {
       const labelX = px(s) + (s.cx < 0.3 ? -14 : 14);
       const anchor = s.cx < 0.3 ? 'right' : 'left';
       ctx.textAlign = anchor;
-      ctx.fillStyle = isLast ? '#BF953F' : '#D4AF6A';
-      ctx.font = isLast ? '600 13px Cormorant Garamond, Georgia, serif' : '500 11px Cormorant Garamond, Georgia, serif';
-      ctx.fillText(isDelphi2 ? '' : s.name, labelX, py(s) - 10);
+      ctx.fillStyle = isLast ? '#8A5F1F' : 'rgba(36,26,12,0.6)';
+      ctx.font = isLast ? '400 13px Cormorant Garamond, Georgia, serif' : '300 11px Cormorant Garamond, Georgia, serif';
+      ctx.fillText(isDelhi2 ? '' : s.name, labelX, py(s) - 12);
       ctx.textAlign = 'left';
     }
   }
 
+  function drawTraveller(x, y) {
+    ctx.save();
+    ctx.shadowColor = 'rgba(184,134,59,0.55)';
+    ctx.shadowBlur = 14;
+    ctx.beginPath();
+    ctx.arc(x, y, 5, 0, Math.PI*2);
+    ctx.fillStyle = '#B8863B';
+    ctx.fill();
+    ctx.shadowBlur = 0;
+    ctx.beginPath();
+    ctx.arc(x, y, 5, 0, Math.PI*2);
+    ctx.lineWidth = 2;
+    ctx.strokeStyle = '#FBF6E9';
+    ctx.stroke();
+    ctx.restore();
+  }
+
   function render(count, partialT) {
-    ctx.clearRect(0, 0, W, H);
     drawBg();
     drawRoute(count - 1, partialT);
     drawDots(count);
+    if (phase === 'travel' && stopIdx < CURVES.length) {
+      const [bx, by] = bezier(CURVES[stopIdx], partialT);
+      drawTraveller(bx, by);
+    }
   }
 
   const dayStrip = document.getElementById('jmap-days');
@@ -1841,73 +1870,59 @@ function initRegionMap(regionName) {
   }
   function hideCard() { card.classList.remove('on'); }
 
-  const trav = document.getElementById('jmap-traveller');
-  function moveTrav(x, y) {
-    const rect = canvas.getBoundingClientRect();
-    const scaleX = rect.width / W;
-    const scaleY = rect.height / H;
-    trav.style.display = 'block';
-    trav.style.left = (x * scaleX - 4) + 'px';
-    trav.style.top = (y * scaleY - 4) + 'px';
+  function easeInOutCubic(t) {
+    return t < 0.5 ? 4*t*t*t : 1 - Math.pow(-2*t + 2, 3) / 2;
   }
-  function hideTrav() { trav.style.display = 'none'; }
 
   let stopIdx = 0;
   let phase = 'reveal';
-  let frame = 0;
-  const TRAVEL_F = 80;
-  const SHOW_F = 180;
+  let elapsed = 0;
+  let lastTs = null;
 
-  function tick() {
+  function tick(ts) {
     if (!mapRunning) return;
+    if (lastTs === null) lastTs = ts;
+    const dt = ts - lastTs;
+    lastTs = ts;
 
     if (phase === 'reveal') {
       render(stopIdx + 1, 0);
       showCard(stopIdx);
       updateStrip(stopIdx);
-      hideTrav();
       phase = 'show';
-      frame = 0;
-      mapAnimationId = requestAnimationFrame(tick);
+      elapsed = 0;
 
     } else if (phase === 'show') {
-      frame++;
-      if (frame >= SHOW_F) {
+      elapsed += dt;
+      if (elapsed >= 3200) {
         if (stopIdx >= STOPS.length - 1) {
+          hideCard();
           setTimeout(() => {
-            hideCard();
             stopIdx = 0;
             phase = 'reveal';
-            frame = 0;
-            if (mapRunning) mapAnimationId = requestAnimationFrame(tick);
-          }, 2500);
+            lastTs = null;
+            requestAnimationFrame(tick);
+          }, 2600);
           return;
         }
         hideCard();
         phase = 'travel';
-        frame = 0;
+        elapsed = 0;
       }
-      mapAnimationId = requestAnimationFrame(tick);
 
     } else if (phase === 'travel') {
-      frame++;
-      const t = frame / TRAVEL_F;
-      const eased = t < 0.5 ? 2*t*t : -1+(4-2*t)*t;
-      render(stopIdx + 1, eased);
-
-      if (stopIdx < CURVES.length) {
-        const [bx, by] = bezier(CURVES[stopIdx], eased);
-        moveTrav(bx, by);
-      }
-
-      if (frame >= TRAVEL_F) {
+      elapsed += dt;
+      const t = Math.min(1, elapsed / 1500);
+      const travelT = easeInOutCubic(t);
+      render(stopIdx + 1, travelT);
+      if (t >= 1) {
         stopIdx++;
-        hideTrav();
         phase = 'reveal';
-        frame = 0;
+        elapsed = 0;
       }
-      mapAnimationId = requestAnimationFrame(tick);
     }
+
+    mapAnimationId = requestAnimationFrame(tick);
   }
 
   document.getElementById('jmap-title-main').textContent = regionName;
