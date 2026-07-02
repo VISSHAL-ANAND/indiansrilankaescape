@@ -871,27 +871,27 @@ a{text-decoration:none}
       <div class="step-hint">Per person, excluding international flights. This guides us in recommending the right properties, experiences, and private transfers.</div>
 
       <div class="budget-display">
-        <div class="budget-cur">USD</div>
-        <div class="budget-num" id="budget-num">$2,500</div>
+        <div class="budget-cur">EUR</div>
+        <div class="budget-num" id="budget-num">€2,500</div>
         <div class="budget-per">per person</div>
       </div>
       <input type="range" class="gold-range" id="budget-slider" min="500" max="25000" step="100" value="2500" oninput="updateBudget(this.value)">
-      <div class="range-labels"><span>$500</span><span>$25,000+</span></div>
+      <div class="range-labels"><span>€500</span><span>€25,000+</span></div>
 
       <div class="budget-tiers" id="budget-tiers">
         <div class="btier" id="tier-0" onclick="selectTier(0,1500)">
           <div class="btier-name">Explorer</div>
-          <div class="btier-range">$500 – $2,000</div>
+          <div class="btier-range">€500 – €2,000</div>
           <div class="btier-desc">Boutique guesthouses, local transport, authentic street experiences</div>
         </div>
         <div class="btier" id="tier-1" onclick="selectTier(1,4000)">
           <div class="btier-name">Signature</div>
-          <div class="btier-range">$2,000 – $6,000</div>
+          <div class="btier-range">€2,000 – €6,000</div>
           <div class="btier-desc">4-star hotels, private guides, curated dinners and cultural access</div>
         </div>
         <div class="btier" id="tier-2" onclick="selectTier(2,12000)">
           <div class="btier-name">Grand</div>
-          <div class="btier-range">$6,000+</div>
+          <div class="btier-range">€6,000+</div>
           <div class="btier-desc">Heritage palaces, private jets, Michelin chefs, bespoke every detail</div>
         </div>
       </div>
@@ -2242,7 +2242,7 @@ function toggle(arr,i,val,elId){
 function updateBudget(val){
   S.budget=parseInt(val);
   const el=document.getElementById('budget-num');
-  if(el)el.textContent='$'+S.budget.toLocaleString('en-US');
+  if(el)el.textContent='€'+S.budget.toLocaleString('en-IE');
   const slider=document.getElementById('budget-slider');
   if(slider){
     slider.value=S.budget;
