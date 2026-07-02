@@ -1589,6 +1589,66 @@ function initRegionMap(regionName) {
           places: ['Lighthouse Beach', 'Ayurveda Spa', 'Seafood Dinner']
         }
       ]
+    },
+    'Tamil Nadu': {
+      subtitle: 'Chennai · Mahabalipuram · Madurai · Kodaikanal · Rameswaram',
+      stops: [
+        {
+          id: 'chennai',
+          name: 'Chennai',
+          cx: 0.86, cy: 0.18,
+          day: 'Day 1',
+          dayLabel: 'Chennai',
+          title: 'Tamil Nadu Arrival',
+          img: 'https://picsum.photos/seed/chennai/600/80',
+          desc: 'A vibrant coastal gateway where classical temples, colonial landmarks, and bustling food markets set the tone for your journey.',
+          places: ['Marina Beach', 'Kapaleeshwarar Temple', 'Fort St. George']
+        },
+        {
+          id: 'mahabalipuram',
+          name: 'Mahabalipuram',
+          cx: 0.76, cy: 0.30,
+          day: 'Day 2',
+          dayLabel: 'Mahabalipuram',
+          title: 'Shore Temple Coast',
+          img: 'https://picsum.photos/seed/mahabalipuram/600/80',
+          desc: 'Ancient rock-cut temples and oceanfront carvings make this UNESCO site a beautiful introduction to Dravidian heritage.',
+          places: ['Shore Temple', 'Pancha Rathas', 'Beach Walk']
+        },
+        {
+          id: 'madurai',
+          name: 'Madurai',
+          cx: 0.62, cy: 0.54,
+          day: 'Day 3',
+          dayLabel: 'Madurai',
+          title: 'Temple City Rituals',
+          img: 'https://picsum.photos/seed/madurai/600/80',
+          desc: 'The vast Meenakshi Temple is the beating heart of the city, with gilded towers, holy tanks, and continuous worship rituals.',
+          places: ['Meenakshi Temple', 'Thirumalai Nayakkar Mahal', 'Gandhi Memorial']
+        },
+        {
+          id: 'kodaikanal',
+          name: 'Kodaikanal',
+          cx: 0.42, cy: 0.36,
+          day: 'Day 4',
+          dayLabel: 'Kodaikanal',
+          title: 'Hill Station Escape',
+          img: 'https://picsum.photos/seed/kodaikanal/600/80',
+          desc: 'Cool hills, lake walks, and pine-scented air provide a refreshing contrast to the south Indian plains.',
+          places: ['Kodaikanal Lake', 'Coaker’s Walk', 'Pillar Rocks']
+        },
+        {
+          id: 'rameswaram',
+          name: 'Rameswaram',
+          cx: 0.74, cy: 0.78,
+          day: 'Day 5',
+          dayLabel: 'Rameswaram',
+          title: 'Pilgrim Island Finale',
+          img: 'https://picsum.photos/seed/rameswaram/600/80',
+          desc: 'A sacred island pilgrimage with sea-swept temples, coral-stone shrines, and the legendary Ramanathaswamy Temple.',
+          places: ['Ramanathaswamy Temple', 'Agni Theertham', 'Dhanushkodi']
+        }
+      ]
     }
   };
 
@@ -2030,7 +2090,7 @@ function openDetail(i){
   document.getElementById('sel-count').textContent=r.name;
 
   const mapContainer = document.getElementById('golden-triangle-map');
-  if (r.name === 'Golden Triangle' || r.name === 'Kerala') {
+  if (r.name === 'Golden Triangle' || r.name === 'Kerala' || r.name === 'Tamil Nadu') {
     mapContainer.classList.add('active');
     stopGoldenTriangleMap();
     setTimeout(() => initRegionMap(r.name), 100);
