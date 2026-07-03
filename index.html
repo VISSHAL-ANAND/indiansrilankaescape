@@ -236,196 +236,198 @@ a{text-decoration:none}
 }
 #golden-triangle-map.active { display: block; }
 
-#jmap-root {
-  background: transparent;
-  border-radius: 8px;
-  width: 100%;
-  overflow: hidden;
-  position: relative;
-  aspect-ratio: 680 / 280; /* even shorter */
-}
-
-#jmap-canvas {
-  display: block;
-  width: 100%;
-  height: auto;
-}
-
-/* Card – crisp, gold-accented */
-#jmap-card {
-  position: absolute;
-  right: 14px;
-  bottom: 48px;
-  width: 190px;
-  background: rgba(255, 248, 240, 0.97);
-  border: 1px solid var(--gold-mid);
-  border-radius: 6px;
-  overflow: hidden;
-  opacity: 0;
-  transform: translateY(6px);
-  transition: opacity 0.5s ease, transform 0.5s ease;
-  pointer-events: none;
-  box-shadow: 0 4px 16px rgba(191,149,63,0.12);
-}
-#jmap-card.on { opacity: 1; transform: translateY(0); }
-
-#jmap-card-img {
-  height: 64px;
-  background-size: cover;
-  background-position: center;
-  position: relative;
-}
-#jmap-card-img::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(to top, rgba(255,248,240,0.92) 0%, rgba(255,248,240,0.1) 60%);
-}
-#jmap-card-city {
-  position: absolute;
-  bottom: 4px;
-  left: 8px;
-  z-index: 2;
-  font-family: 'Cormorant Garamond', Georgia, serif;
-  font-size: 18px;
-  font-weight: 400;
-  color: var(--ink);
-  letter-spacing: 0.04em;
-  line-height: 1;
-}
-#jmap-card-day {
-  position: absolute;
-  top: 4px;
-  left: 8px;
-  z-index: 2;
-  font-family: 'Inter', sans-serif;
-  font-size: 7px;
-  letter-spacing: 0.24em;
-  text-transform: uppercase;
-  color: var(--gold);
-  font-weight: 600;
-}
-
-#jmap-card-body { padding: 6px 10px 10px; }
-#jmap-card-title {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 12px;
-  font-weight: 400;
-  color: var(--ink);
-  margin-bottom: 2px;
-  line-height: 1.3;
-  font-style: italic;
-}
-#jmap-card-desc {
-  font-family: 'Inter', sans-serif;
-  font-size: 9px;
-  color: var(--ink-soft);
-  line-height: 1.4;
-  margin-bottom: 4px;
-}
-#jmap-card-places { display: flex; flex-wrap: wrap; gap: 3px; }
-.jmap-place {
-  font-family: 'Inter', sans-serif;
-  font-size: 7.5px;
-  color: var(--ink-soft);
-  background: rgba(191,149,63,0.08);
-  border: 1px solid rgba(191,149,63,0.2);
-  padding: 1px 5px;
-  border-radius: 100px;
-}
-
-/* Day strip – gold & transparent */
-#jmap-days {
-  position: absolute;
-  left: 0; right: 0;
-  bottom: 0;
-  background: transparent;
-  border-top: 1px solid rgba(191,149,63,0.15);
-  display: flex;
-  align-items: stretch;
-  height: 32px;
-}
-.jmap-day-btn {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 1px;
-  border-right: 1px solid rgba(191,149,63,0.08);
-  cursor: default;
-  transition: background 0.3s;
-  position: relative;
-}
-.jmap-day-btn:last-child { border-right: none; }
-.jmap-day-btn.done { background: rgba(191,149,63,0.03); }
-.jmap-day-btn.active { background: rgba(191,149,63,0.06); }
-.jmap-day-dot {
-  width: 5px;
-  height: 5px;
-  border-radius: 50%;
-  background: rgba(191,149,63,0.25);
-  transition: background 0.4s, transform 0.4s;
-}
-.jmap-day-btn.done .jmap-day-dot { background: var(--gold); }
-.jmap-day-btn.active .jmap-day-dot { background: var(--gold); transform: scale(1.4); }
-.jmap-day-label {
-  font-family: 'Inter', sans-serif;
-  font-size: 6.5px;
-  letter-spacing: 0.1em;
-  color: var(--ink-soft);
-  transition: color 0.4s;
-  font-weight: 400;
-}
-.jmap-day-btn.done .jmap-day-label { color: var(--gold); font-weight: 500; }
-.jmap-day-btn.active .jmap-day-label { color: var(--gold); font-weight: 600; }
-
-.jmap-day-btn.active::after {
-  content: '';
-  position: absolute;
-  top: 0; left: 0; right: 0;
-  height: 2px;
-  background: var(--gold);
-}
-
-/* Title – gold */
 #jmap-title {
-  position: absolute;
-  top: 8px;
-  left: 12px;
-  z-index: 5;
+  margin-bottom: 1.2rem;
 }
 #jmap-title-eye {
-  font-family: 'Inter', sans-serif;
-  font-size: 6.5px;
-  letter-spacing: 0.28em;
+  font-size: .58rem;
+  letter-spacing: .28em;
   text-transform: uppercase;
   color: var(--gold);
-  margin-bottom: 1px;
+  margin-bottom: .4rem;
   font-weight: 500;
 }
 #jmap-title-main {
-  font-family: 'Cormorant Garamond', Georgia, serif;
-  font-size: 16px;
+  font-family: var(--serif);
+  font-size: 1.6rem;
   font-weight: 300;
   color: var(--ink);
-  letter-spacing: 0.04em;
+  letter-spacing: .04em;
 }
 
-/* Traveller dot – brighter gold */
-#jmap-traveller {
+.jmap-layout {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 2rem;
+  background: var(--white);
+  border: 1px solid var(--cream-dark);
+  border-radius: 8px;
+  padding: 1.5rem;
+}
+
+.jmap-itinerary {
+  display: flex;
+  flex-direction: column;
+  gap: .6rem;
+}
+
+.jmap-day-item {
+  background: var(--cream);
+  border: 1px solid var(--cream-dark);
+  border-radius: 6px;
+  padding: .9rem 1rem;
+  cursor: pointer;
+  transition: all .3s;
+  position: relative;
+}
+.jmap-day-item:hover {
+  border-color: var(--gold);
+  background: var(--white);
+}
+.jmap-day-item.active {
+  border-color: var(--gold);
+  background: var(--gold-dim);
+  border-width: 2px;
+  padding: .85rem .95rem;
+}
+
+.jmap-day-badge {
+  display: inline-block;
+  background: var(--ink);
+  color: var(--cream);
+  font-size: .55rem;
+  letter-spacing: .15em;
+  text-transform: uppercase;
+  padding: .25rem .6rem;
+  border-radius: 3px;
+  font-weight: 600;
+  margin-bottom: .4rem;
+}
+.jmap-day-item.active .jmap-day-badge {
+  background: var(--gold);
+  color: var(--ink);
+}
+
+.jmap-day-title {
+  font-size: .9rem;
+  font-weight: 500;
+  color: var(--ink);
+  margin-bottom: .2rem;
+  line-height: 1.3;
+}
+
+.jmap-day-subtitle {
+  font-size: .7rem;
+  color: var(--ink-soft);
+  line-height: 1.4;
+}
+
+.jmap-visual {
+  position: relative;
+  background: linear-gradient(135deg, #faf9f7 0%, #f5f3ef 100%);
+  border-radius: 6px;
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#jmap-map-container {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+#jmap-svg {
+  width: 100%;
+  height: auto;
+  max-height: 400px;
+}
+
+.jmap-location {
+  cursor: pointer;
+  transition: all .3s;
+}
+
+.jmap-location circle {
+  transition: all .3s;
+}
+
+.jmap-location:hover circle {
+  r: 8;
+  fill: var(--gold-mid);
+}
+
+.jmap-location text {
+  font-family: var(--sans);
+  font-size: 9px;
+  fill: var(--ink);
+  pointer-events: none;
+}
+
+.jmap-location.start circle {
+  fill: #7aab8f;
+  stroke: #5a8b6f;
+}
+
+.jmap-location.end circle {
+  fill: var(--gold);
+  stroke: var(--gold-mid);
+}
+
+.jmap-location.stop circle {
+  fill: var(--ink-mid);
+  stroke: var(--ink);
+}
+
+.jmap-location.active circle {
+  r: 10;
+  fill: var(--gold);
+  stroke: var(--gold-mid);
+  stroke-width: 3;
+}
+
+.jmap-route-line {
+  fill: none;
+  stroke: var(--ink-soft);
+  stroke-width: 1.5;
+  stroke-dasharray: 5, 5;
+  opacity: 0.5;
+}
+
+.jmap-legend {
   position: absolute;
+  bottom: 1rem;
+  left: 1rem;
+  display: flex;
+  gap: 1rem;
+  font-size: .65rem;
+  color: var(--ink-soft);
+}
+
+.jmap-legend-item {
+  display: flex;
+  align-items: center;
+  gap: .4rem;
+}
+
+.jmap-legend-dot {
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  background: #fff;
-  border: 2px solid var(--gold-mid);
-  box-shadow: 0 0 14px rgba(191,149,63,0.6);
-  pointer-events: none;
-  z-index: 20;
-  transition: left 0.05s linear, top 0.05s linear;
-  display: none;
+  border: 1.5px solid;
 }
+
+.jmap-legend-dot.start {
+  background: #7aab8f;
+  border-color: #5a8b6f;
+}
+
+.jmap-legend-dot.stop {
+  background: var(--ink-mid);
+  border-color: var(--ink);
+}
+
 /* Fields */
 .field{margin-bottom:1.4rem}
 .field-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1.4rem}
@@ -547,18 +549,8 @@ a{text-decoration:none}
   .dd-main-content{padding:2rem 1.5rem}
   .dd-bottom{padding:0 1.5rem 2rem}
   .region-exp-head{padding:0 1.5rem}
-  #jmap-root { aspect-ratio: 680 / 320; min-height: 220px; }
-  #jmap-card { width: 150px; right: 10px; bottom: 28px; }
-  #jmap-card-img { height: 46px; }
-  #jmap-card-title { font-size: 11px; }
-  #jmap-card-desc { font-size: 8px; }
-  #jmap-card-places { gap: 2px; }
-  .jmap-place { font-size: 6px; padding: 1px 4px; }
-  #jmap-card-city { font-size: 13px; }
-  #jmap-title-main { font-size: 13px; }
-  #jmap-days { height: 26px; }
-  .jmap-day-label { font-size: 5.5px; }
-  #jmap-traveller { width: 10px; height: 10px; }
+  .jmap-layout{grid-template-columns:1fr;gap:1.2rem}
+  .jmap-visual{min-height:300px}
 }
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms !important;transition-duration:.01ms !important}}
 </style>
@@ -758,29 +750,20 @@ a{text-decoration:none}
           <div class="dd-bottom">
             <!-- ═══ MAP – Golden Triangle itinerary ═══ -->
             <div id="golden-triangle-map">
-              <div id="jmap-root">
-                <canvas id="jmap-canvas" width="580" height="280"></canvas>
-                <div id="jmap-title">
-                  <div id="jmap-title-eye">Your journey</div>
-                  <div id="jmap-title-main">The Golden Triangle</div>
-                </div>
-                <div id="jmap-card">
-                  <div id="jmap-card-img">
-                    <div id="jmap-card-day"></div>
-                    <div id="jmap-card-city"></div>
-                  </div>
-                  <div id="jmap-card-body">
-                    <div id="jmap-card-title"></div>
-                    <div id="jmap-card-desc"></div>
-                    <div id="jmap-card-places"></div>
+              <div id="jmap-title">
+                <div id="jmap-title-eye">Your journey</div>
+                <div id="jmap-title-main">The Golden Triangle</div>
+              </div>
+              <div class="jmap-layout">
+                <div class="jmap-itinerary" id="jmap-itinerary"></div>
+                <div class="jmap-visual">
+                  <div id="jmap-map-container">
+                    <svg id="jmap-svg" viewBox="0 0 400 300"></svg>
                   </div>
                 </div>
-                <div id="jmap-traveller"></div>
-                <div id="jmap-days"></div>
               </div>
             </div>
             <!-- ═══ end map ═══ -->
-
           </div>
         </div>
 
@@ -871,27 +854,27 @@ a{text-decoration:none}
       <div class="step-hint">Per person, excluding international flights. This guides us in recommending the right properties, experiences, and private transfers.</div>
 
       <div class="budget-display">
-        <div class="budget-cur">EUR</div>
-        <div class="budget-num" id="budget-num">€2,500</div>
+        <div class="budget-cur">USD</div>
+        <div class="budget-num" id="budget-num">$2,500</div>
         <div class="budget-per">per person</div>
       </div>
       <input type="range" class="gold-range" id="budget-slider" min="500" max="25000" step="100" value="2500" oninput="updateBudget(this.value)">
-      <div class="range-labels"><span>€500</span><span>€25,000+</span></div>
+      <div class="range-labels"><span>$500</span><span>$25,000+</span></div>
 
       <div class="budget-tiers" id="budget-tiers">
         <div class="btier" id="tier-0" onclick="selectTier(0,1500)">
           <div class="btier-name">Explorer</div>
-          <div class="btier-range">€500 – €2,000</div>
+          <div class="btier-range">$500 – $2,000</div>
           <div class="btier-desc">Boutique guesthouses, local transport, authentic street experiences</div>
         </div>
         <div class="btier" id="tier-1" onclick="selectTier(1,4000)">
           <div class="btier-name">Signature</div>
-          <div class="btier-range">€2,000 – €6,000</div>
+          <div class="btier-range">$2,000 – $6,000</div>
           <div class="btier-desc">4-star hotels, private guides, curated dinners and cultural access</div>
         </div>
         <div class="btier" id="tier-2" onclick="selectTier(2,12000)">
           <div class="btier-name">Grand</div>
-          <div class="btier-range">€6,000+</div>
+          <div class="btier-range">$6,000+</div>
           <div class="btier-desc">Heritage palaces, private jets, Michelin chefs, bespoke every detail</div>
         </div>
       </div>
@@ -1439,504 +1422,118 @@ function syncAddonsStep() {
   }
 }
 
-/* ══ MAP INITIALISATION ══ */
-let mapAnimationId = null;
-let mapRunning = false;
-
+/* ══ MAP ══ */
 function initRegionMap(regionName) {
-  const container = document.getElementById('jmap-root');
-  if (!container) return;
-
-  if (mapRunning) {
-    cancelAnimationFrame(mapAnimationId);
-    mapRunning = false;
-  }
-
-  const W = 680, H = 280;
-  const canvas = document.getElementById('jmap-canvas');
-  const ctx = canvas.getContext('2d');
-  canvas.width = W; canvas.height = H;
-
   const ROUTES = {
     'Golden Triangle': {
-      subtitle: 'Delhi · Agra · Jaipur · Ranthambore · Fatehpur Sikri',
       stops: [
-        {
-          id: 'delhi',
-          name: 'Delhi',
-          cx: 0.365, cy: 0.195,
-          day: 'Days 1–2',
-          dayLabel: 'Delhi',
-          title: 'Arrival in the Capital',
-          img: 'https://picsum.photos/seed/delhi/600/80',
-          desc: 'Mughal grandeur meets living city. From Jama Masjid\'s vast courtyard to the lanes of Chandni Chowk — Delhi contains multitudes.',
-          places: ['Jama Masjid', 'Red Fort', 'Humayun\'s Tomb', 'India Gate', 'Qutub Minar']
-        },
-        {
-          id: 'agra',
-          name: 'Agra',
-          cx: 0.445, cy: 0.385,
-          day: 'Day 3',
-          dayLabel: 'Agra',
-          title: 'Journey to the Taj',
-          img: 'https://picsum.photos/seed/agra/600/80',
-          desc: 'A wonder born of love. The Taj glows amber at dusk and ivory at dawn — witness the shift from the riverbank at sunrise.',
-          places: ['Taj Mahal', 'Agra Fort']
-        },
-        {
-          id: 'fatehpur',
-          name: 'Fatehpur Sikri',
-          cx: 0.365, cy: 0.455,
-          day: 'Day 4',
-          dayLabel: 'Fatehpur',
-          title: 'Mughal Marvels',
-          img: 'https://picsum.photos/seed/fatehpur/600/80',
-          desc: 'A deserted Mughal capital frozen in red sandstone, and the hypnotic geometry of Chand Baori — 3,500 steps spiralling into earth.',
-          places: ['Fatehpur Sikri', 'Chand Baori', 'Harshat Mata Temple']
-        },
-        {
-          id: 'ranthambore',
-          name: 'Ranthambore',
-          cx: 0.265, cy: 0.535,
-          day: 'Day 5',
-          dayLabel: 'Ranthambore',
-          title: 'Realm of the Tiger',
-          img: 'https://picsum.photos/seed/ranthambore/600/80',
-          desc: 'Ancient ruins reclaimed by jungle. Tigers prowl beside crumbling pavilions and lakes, alongside leopards and over 300 species of birds.',
-          places: ['Tiger Safari (Dawn)', 'Ranthambore Fort', 'Afternoon Safari']
-        },
-        {
-          id: 'jaipur',
-          name: 'Jaipur',
-          cx: 0.215, cy: 0.355,
-          day: 'Days 6–7',
-          dayLabel: 'Jaipur',
-          title: 'The Pink City',
-          img: 'https://picsum.photos/seed/jaipur/600/80',
-          desc: 'Rajput royalty in rose sandstone. From the mirrored halls of Amber Fort to the Palace of Winds\' 953 latticed windows.',
-          places: ['Amber Fort', 'Hawa Mahal', 'City Palace', 'Jantar Mantar']
-        },
-        {
-          id: 'delhi2',
-          name: 'Delhi',
-          cx: 0.365, cy: 0.195,
-          day: 'Day 8',
-          dayLabel: 'Farewell',
-          title: 'Farewell Journey',
-          img: 'https://picsum.photos/seed/delhi2/600/80',
-          desc: 'The drive home to Delhi, carrying memories of marble, tiger tracks, and palace courtyards.',
-          places: ['Delhi Airport', 'Departure']
-        }
+        {id: 'delhi', name: 'Delhi', day: 'Day 1', subtitle: 'One night', desc: 'Arrive Stockholm, Sweden', x: 200, y: 50, type: 'start'},
+        {id: 'agra', name: 'Agra', day: 'Day 2', subtitle: 'One night', desc: 'Stockholm', x: 280, y: 100, type: 'stop'},
+        {id: 'fatehpur', name: 'Fatehpur Sikri', day: 'Day 3', subtitle: 'One night', desc: 'Stockholm', x: 240, y: 150, type: 'stop'},
+        {id: 'jaipur', name: 'Jaipur', day: 'Day 4', subtitle: 'One night', desc: 'Stockholm – Rovaniemi, Finland', x: 150, y: 120, type: 'stop'},
+        {id: 'ranthambore', name: 'Ranthambore', day: 'Day 5', subtitle: 'One night', desc: 'Rovaniemi', x: 120, y: 200, type: 'stop'},
+        {id: 'delhi2', name: 'Delhi', day: 'Day 6', subtitle: 'Departure', desc: 'Rovaniemi', x: 200, y: 50, type: 'end'}
       ]
     },
     'Kerala': {
-      subtitle: 'Kochi · Alleppey · Munnar · Thekkady · Kovalam',
       stops: [
-        {
-          id: 'kochi',
-          name: 'Kochi',
-          cx: 0.26, cy: 0.24,
-          day: 'Day 1',
-          dayLabel: 'Kochi',
-          title: 'Arrival in Kochi',
-          img: 'https://picsum.photos/seed/kochi/600/80',
-          desc: 'Historic port city on the Arabian Sea, famed for spice markets, colonial forts, and the famous Chinese fishing nets.',
-          places: ['Fort Kochi', 'Jew Town', 'Chinese Nets']
-        },
-        {
-          id: 'alleppey',
-          name: 'Alleppey',
-          cx: 0.40, cy: 0.45,
-          day: 'Days 2–3',
-          dayLabel: 'Alleppey',
-          title: 'Backwater Houseboat',
-          img: 'https://picsum.photos/seed/alleppey/600/80',
-          desc: 'Glide through tranquil canals lined with coconut palms and village life on a traditional houseboat.',
-          places: ['Houseboat Cruise', 'Village Walk', 'Kathakali Show']
-        },
-        {
-          id: 'munnar',
-          name: 'Munnar',
-          cx: 0.54, cy: 0.18,
-          day: 'Day 4',
-          dayLabel: 'Munnar',
-          title: 'Tea Garden Hills',
-          img: 'https://picsum.photos/seed/munnar/600/80',
-          desc: 'Mist-shrouded tea plantations and cool hillscape, perfect for leisurely walks and panoramic views.',
-          places: ['Tea Estate', 'Eravikulam Park', 'Pothamedu']
-        },
-        {
-          id: 'thekkady',
-          name: 'Thekkady',
-          cx: 0.68, cy: 0.45,
-          day: 'Day 5',
-          dayLabel: 'Thekkady',
-          title: 'Wildlife & Spice Trails',
-          img: 'https://picsum.photos/seed/thekkady/600/80',
-          desc: 'Periyar wildlife sanctuary and spice plantations in a cool, fragrant hill setting.',
-          places: ['Periyar Safari', 'Spice Farm', 'Boat Ride']
-        },
-        {
-          id: 'kovalam',
-          name: 'Kovalam',
-          cx: 0.86, cy: 0.73,
-          day: 'Days 6–7',
-          dayLabel: 'Kovalam',
-          title: 'Coastal Finale',
-          img: 'https://picsum.photos/seed/kovalam/600/80',
-          desc: 'Sandy beaches, lighthouse views and a relaxing finish to your Kerala journey.',
-          places: ['Lighthouse Beach', 'Ayurveda Spa', 'Seafood Dinner']
-        }
+        {id: 'kochi', name: 'Kochi', day: 'Day 1', subtitle: 'One night', desc: 'Arrival in Kochi', x: 120, y: 100, type: 'start'},
+        {id: 'alleppey', name: 'Alleppey', day: 'Days 2-3', subtitle: 'Two nights', desc: 'Backwater Houseboat', x: 180, y: 150, type: 'stop'},
+        {id: 'munnar', name: 'Munnar', day: 'Day 4', subtitle: 'One night', desc: 'Tea Garden Hills', x: 240, y: 80, type: 'stop'},
+        {id: 'thekkady', name: 'Thekkady', day: 'Day 5', subtitle: 'One night', desc: 'Wildlife & Spice Trails', x: 300, y: 140, type: 'stop'},
+        {id: 'kovalam', name: 'Kovalam', day: 'Days 6-7', subtitle: 'Two nights', desc: 'Coastal Finale', x: 340, y: 220, type: 'end'}
       ]
     },
     'Tamil Nadu': {
-      subtitle: 'Chennai · Mahabalipuram · Madurai · Kodaikanal · Rameswaram',
       stops: [
-        {
-          id: 'chennai',
-          name: 'Chennai',
-          cx: 0.86, cy: 0.18,
-          day: 'Day 1',
-          dayLabel: 'Chennai',
-          title: 'Tamil Nadu Arrival',
-          img: 'https://picsum.photos/seed/chennai/600/80',
-          desc: 'A vibrant coastal gateway where classical temples, colonial landmarks, and bustling food markets set the tone for your journey.',
-          places: ['Marina Beach', 'Kapaleeshwarar Temple', 'Fort St. George']
-        },
-        {
-          id: 'mahabalipuram',
-          name: 'Mahabalipuram',
-          cx: 0.76, cy: 0.30,
-          day: 'Day 2',
-          dayLabel: 'Mahabalipuram',
-          title: 'Shore Temple Coast',
-          img: 'https://picsum.photos/seed/mahabalipuram/600/80',
-          desc: 'Ancient rock-cut temples and oceanfront carvings make this UNESCO site a beautiful introduction to Dravidian heritage.',
-          places: ['Shore Temple', 'Pancha Rathas', 'Beach Walk']
-        },
-        {
-          id: 'madurai',
-          name: 'Madurai',
-          cx: 0.62, cy: 0.54,
-          day: 'Day 3',
-          dayLabel: 'Madurai',
-          title: 'Temple City Rituals',
-          img: 'https://picsum.photos/seed/madurai/600/80',
-          desc: 'The vast Meenakshi Temple is the beating heart of the city, with gilded towers, holy tanks, and continuous worship rituals.',
-          places: ['Meenakshi Temple', 'Thirumalai Nayakkar Mahal', 'Gandhi Memorial']
-        },
-        {
-          id: 'kodaikanal',
-          name: 'Kodaikanal',
-          cx: 0.42, cy: 0.36,
-          day: 'Day 4',
-          dayLabel: 'Kodaikanal',
-          title: 'Hill Station Escape',
-          img: 'https://picsum.photos/seed/kodaikanal/600/80',
-          desc: 'Cool hills, lake walks, and pine-scented air provide a refreshing contrast to the south Indian plains.',
-          places: ['Kodaikanal Lake', 'Coaker’s Walk', 'Pillar Rocks']
-        },
-        {
-          id: 'rameswaram',
-          name: 'Rameswaram',
-          cx: 0.74, cy: 0.78,
-          day: 'Day 5',
-          dayLabel: 'Rameswaram',
-          title: 'Pilgrim Island Finale',
-          img: 'https://picsum.photos/seed/rameswaram/600/80',
-          desc: 'A sacred island pilgrimage with sea-swept temples, coral-stone shrines, and the legendary Ramanathaswamy Temple.',
-          places: ['Ramanathaswamy Temple', 'Agni Theertham', 'Dhanushkodi']
-        }
+        {id: 'chennai', name: 'Chennai', day: 'Day 1', subtitle: 'One night', desc: 'Tamil Nadu Arrival', x: 320, y: 80, type: 'start'},
+        {id: 'mahabalipuram', name: 'Mahabalipuram', day: 'Day 2', subtitle: 'One night', desc: 'Shore Temple Coast', x: 300, y: 130, type: 'stop'},
+        {id: 'madurai', name: 'Madurai', day: 'Day 3', subtitle: 'One night', desc: 'Temple City Rituals', x: 240, y: 180, type: 'stop'},
+        {id: 'kodaikanal', name: 'Kodaikanal', day: 'Day 4', subtitle: 'One night', desc: 'Hill Station Escape', x: 170, y: 140, type: 'stop'},
+        {id: 'rameswaram', name: 'Rameswaram', day: 'Day 5', subtitle: 'Departure', desc: 'Pilgrim Island Finale', x: 280, y: 240, type: 'end'}
       ]
     }
   };
 
   const routeData = ROUTES[regionName] || ROUTES['Golden Triangle'];
-  const STOPS = routeData.stops;
-
-  function px(s) { return s.cx * W; }
-  function py(s) { return s.cy * H; }
-
-  function drawBg() {
-    ctx.clearRect(0, 0, W, H);
-    ctx.fillStyle = '#F6EFDD';
-    ctx.fillRect(0, 0, W, H);
-
-    ctx.strokeStyle = 'rgba(184,134,59,0.055)';
-    ctx.lineWidth = 0.6;
-    for (let x = 0; x <= W; x += 50) { ctx.beginPath(); ctx.moveTo(x,0); ctx.lineTo(x,H); ctx.stroke(); }
-    for (let y = 0; y <= H; y += 50) { ctx.beginPath(); ctx.moveTo(0,y); ctx.lineTo(W,y); ctx.stroke(); }
-
-    ctx.beginPath();
-    const shape = [
-      [0.08,0.02],[0.62,0.02],[0.78,0.08],[0.86,0.16],[0.90,0.26],
-      [0.92,0.38],[0.88,0.50],[0.80,0.60],[0.72,0.70],[0.62,0.80],
-      [0.50,0.90],[0.42,0.96],[0.34,0.92],[0.26,0.84],[0.18,0.74],
-      [0.12,0.62],[0.07,0.50],[0.05,0.38],[0.06,0.22],[0.08,0.02]
-    ];
-    shape.forEach(([x,y],i) => i===0 ? ctx.moveTo(x*W,y*H) : ctx.lineTo(x*W,y*H));
-    ctx.closePath();
-    ctx.fillStyle = 'rgba(184,134,59,0.045)';
-    ctx.fill();
-    ctx.strokeStyle = 'rgba(184,134,59,0.16)';
-    ctx.lineWidth = 1;
-    ctx.stroke();
-
-    const cx2 = W - 52, cy2 = H - 72;
-    ctx.strokeStyle = 'rgba(184,134,59,0.22)';
-    ctx.lineWidth = 0.7;
-    for (let a = 0; a < 8; a++) {
-      const ang = (a * Math.PI) / 4;
-      ctx.beginPath();
-      ctx.moveTo(cx2, cy2);
-      ctx.lineTo(cx2 + Math.cos(ang) * 18, cy2 + Math.sin(ang) * 18);
-      ctx.stroke();
-    }
-    ctx.fillStyle = 'rgba(154,108,42,0.55)';
-    ctx.font = '500 9px Inter, sans-serif';
-    ctx.textAlign = 'center';
-    ctx.fillText('N', cx2, cy2 - 24);
-    ctx.textAlign = 'left';
-
-    ctx.fillStyle = 'rgba(154,108,42,0.32)';
-    ctx.font = '400 9px Inter, sans-serif';
-    ctx.fillText(routeData.subtitle, 24, H - 40);
+  const stops = routeData.stops;
+  
+  // Build itinerary list
+  const itineraryEl = document.getElementById('jmap-itinerary');
+  if (itineraryEl) {
+    itineraryEl.innerHTML = stops.map((stop, i) => `
+      <div class="jmap-day-item ${i === 0 ? 'active' : ''}" data-index="${i}" onclick="selectDay(${i})">
+        <div class="jmap-day-badge">${stop.day}</div>
+        <div class="jmap-day-title">${stop.desc}</div>
+        <div class="jmap-day-subtitle">${stop.subtitle}</div>
+      </div>
+    `).join('');
   }
 
-  let CURVES = [];
-  function rebuildCurves() {
-    const offsets = [[-22,12],[18,-8],[-16,10],[14,-12],[-20,8]];
-    CURVES = STOPS.slice(0,-1).map((s, i) => {
-      const a = s, b = STOPS[i+1];
-      const [ox, oy] = offsets[i] || [0,0];
-      return {
-        ax: px(a), ay: py(a),
-        bx: px(b), by: py(b),
-        mx: (px(a)+px(b))/2 + ox,
-        my: (py(a)+py(b))/2 + oy
-      };
-    });
-  }
-  rebuildCurves();
-
-  function bezier(c, t) {
-    return [
-      (1-t)*(1-t)*c.ax + 2*(1-t)*t*c.mx + t*t*c.bx,
-      (1-t)*(1-t)*c.ay + 2*(1-t)*t*c.my + t*t*c.by
-    ];
+  // Build SVG map
+  const svg = document.getElementById('jmap-svg');
+  if (!svg) return;
+  
+  svg.innerHTML = '';
+  
+  // Draw route lines
+  for (let i = 0; i < stops.length - 1; i++) {
+    const from = stops[i];
+    const to = stops[i + 1];
+    const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+    line.setAttribute('x1', from.x);
+    line.setAttribute('y1', from.y);
+    line.setAttribute('x2', to.x);
+    line.setAttribute('y2', to.y);
+    line.classList.add('jmap-route-line');
+    svg.appendChild(line);
   }
 
-  function drawSmoothPath(c, fromT, toT, step) {
-    ctx.beginPath();
-    const [sx, sy] = bezier(c, fromT);
-    ctx.moveTo(sx, sy);
-    for (let t = fromT; t <= toT; t += step) {
-      const [x, y] = bezier(c, t);
-      ctx.lineTo(x, y);
-    }
-    const [ex, ey] = bezier(c, toT);
-    ctx.lineTo(ex, ey);
-  }
+  // Draw location markers
+  stops.forEach((stop, i) => {
+    const g = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+    g.classList.add('jmap-location', stop.type);
+    if (i === 0) g.classList.add('active');
+    g.setAttribute('data-index', i);
+    g.onclick = () => selectDay(i);
 
-  function drawRoute(segsDone, partialT) {
-    for (let i = 0; i < segsDone; i++) {
-      const c = CURVES[i];
-      drawSmoothPath(c, 0, 1, 0.008);
-      ctx.setLineDash([5, 5]);
-      ctx.strokeStyle = 'rgba(184,134,59,0.7)';
-      ctx.lineWidth = 1.5;
-      ctx.lineCap = 'round';
-      ctx.stroke();
-      ctx.setLineDash([]);
+    const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+    circle.setAttribute('cx', stop.x);
+    circle.setAttribute('cy', stop.y);
+    circle.setAttribute('r', i === 0 ? '10' : '6');
+    circle.setAttribute('stroke-width', i === 0 ? '3' : '2');
 
-      const [ix, iy] = bezier(c, 0.55);
-      const [ix2, iy2] = bezier(c, 0.57);
-      const ang = Math.atan2(iy2-iy, ix2-ix);
-      ctx.save();
-      ctx.translate(ix, iy);
-      ctx.rotate(ang);
-      ctx.fillStyle = 'rgba(154,108,42,0.6)';
-      ctx.font = '10px sans-serif';
-      ctx.fillText('✈', -5, 4);
-      ctx.restore();
-    }
+    const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+    text.setAttribute('x', stop.x);
+    text.setAttribute('y', stop.y - 15);
+    text.setAttribute('text-anchor', 'middle');
+    text.setAttribute('font-weight', '500');
+    text.textContent = stop.name;
 
-    if (segsDone < CURVES.length && partialT > 0) {
-      const c = CURVES[segsDone];
-      drawSmoothPath(c, 0, partialT, 0.008);
-      ctx.setLineDash([5, 5]);
-      ctx.strokeStyle = 'rgba(184,134,59,0.4)';
-      ctx.lineWidth = 1.5;
-      ctx.lineCap = 'round';
-      ctx.stroke();
-      ctx.setLineDash([]);
-    }
-  }
-
-  function drawDots(count) {
-    for (let i = 0; i < count; i++) {
-      const s = STOPS[i];
-      const isLast = i === count - 1;
-      const isDelhi2 = s.id === 'delhi2';
-      if (isDelhi2 && count > 1) continue;
-
-      const r = isLast ? 9 : 5;
-      ctx.beginPath();
-      ctx.arc(px(s), py(s), r, 0, Math.PI*2);
-      ctx.fillStyle = isLast ? '#B8863B' : 'rgba(184,134,59,0.55)';
-      ctx.fill();
-      ctx.strokeStyle = '#F6EFDD';
-      ctx.lineWidth = 2;
-      ctx.stroke();
-
-      if (isLast) {
-        ctx.beginPath();
-        ctx.arc(px(s), py(s), 14, 0, Math.PI*2);
-        ctx.strokeStyle = 'rgba(191,149,63,0.5)';
-        ctx.lineWidth = 1;
-        ctx.stroke();
-        ctx.beginPath();
-        ctx.arc(px(s), py(s), 20, 0, Math.PI*2);
-        ctx.strokeStyle = 'rgba(191,149,63,0.2)';
-        ctx.lineWidth = 1;
-        ctx.stroke();
-      }
-
-      const labelX = px(s) + (s.cx < 0.3 ? -14 : 14);
-      const anchor = s.cx < 0.3 ? 'right' : 'left';
-      ctx.textAlign = anchor;
-      ctx.fillStyle = isLast ? '#8A5F1F' : 'rgba(36,26,12,0.6)';
-      ctx.font = isLast ? '400 13px Cormorant Garamond, Georgia, serif' : '300 11px Cormorant Garamond, Georgia, serif';
-      ctx.fillText(isDelhi2 ? '' : s.name, labelX, py(s) - 12);
-      ctx.textAlign = 'left';
-    }
-  }
-
-  function drawTraveller(x, y) {
-    ctx.save();
-    ctx.shadowColor = 'rgba(184,134,59,0.55)';
-    ctx.shadowBlur = 14;
-    ctx.beginPath();
-    ctx.arc(x, y, 5, 0, Math.PI*2);
-    ctx.fillStyle = '#B8863B';
-    ctx.fill();
-    ctx.shadowBlur = 0;
-    ctx.beginPath();
-    ctx.arc(x, y, 5, 0, Math.PI*2);
-    ctx.lineWidth = 2;
-    ctx.strokeStyle = '#FBF6E9';
-    ctx.stroke();
-    ctx.restore();
-  }
-
-  function render(count, partialT) {
-    drawBg();
-    drawRoute(count - 1, partialT);
-    drawDots(count);
-    if (phase === 'travel' && stopIdx < CURVES.length) {
-      const [bx, by] = bezier(CURVES[stopIdx], partialT);
-      drawTraveller(bx, by);
-    }
-  }
-
-  const dayStrip = document.getElementById('jmap-days');
-  dayStrip.innerHTML = '';
-  STOPS.forEach((s, i) => {
-    const btn = document.createElement('div');
-    btn.className = 'jmap-day-btn';
-    btn.id = `jd-${i}`;
-    btn.innerHTML = `<div class="jmap-day-dot"></div><div class="jmap-day-label">${s.dayLabel}</div>`;
-    dayStrip.appendChild(btn);
+    g.appendChild(circle);
+    g.appendChild(text);
+    svg.appendChild(g);
   });
-
-  function updateStrip(i) {
-    STOPS.forEach((_, j) => {
-      const el = document.getElementById(`jd-${j}`);
-      if (!el) return;
-      el.className = 'jmap-day-btn' + (j < i ? ' done' : j === i ? ' active' : '');
-    });
-  }
-
-  const card = document.getElementById('jmap-card');
-  function showCard(i) {
-    const s = STOPS[i];
-    document.getElementById('jmap-card-img').style.backgroundImage = `url('${s.img}')`;
-    document.getElementById('jmap-card-day').textContent = s.day;
-    document.getElementById('jmap-card-city').textContent = s.name === 'Delhi' && s.id === 'delhi2' ? 'Delhi' : s.name;
-    document.getElementById('jmap-card-title').textContent = s.title;
-    document.getElementById('jmap-card-desc').textContent = s.desc;
-    document.getElementById('jmap-card-places').innerHTML = s.places.map(p => `<span class="jmap-place">${p}</span>`).join('');
-    card.classList.add('on');
-  }
-  function hideCard() { card.classList.remove('on'); }
-
-  function easeInOutCubic(t) {
-    return t < 0.5 ? 4*t*t*t : 1 - Math.pow(-2*t + 2, 3) / 2;
-  }
-
-  let stopIdx = 0;
-  let phase = 'reveal';
-  let elapsed = 0;
-  let lastTs = null;
-
-  function tick(ts) {
-    if (!mapRunning) return;
-    if (lastTs === null) lastTs = ts;
-    const dt = ts - lastTs;
-    lastTs = ts;
-
-    if (phase === 'reveal') {
-      render(stopIdx + 1, 0);
-      showCard(stopIdx);
-      updateStrip(stopIdx);
-      phase = 'show';
-      elapsed = 0;
-
-    } else if (phase === 'show') {
-      elapsed += dt;
-      if (elapsed >= 3200) {
-        if (stopIdx >= STOPS.length - 1) {
-          hideCard();
-          setTimeout(() => {
-            stopIdx = 0;
-            phase = 'reveal';
-            lastTs = null;
-            requestAnimationFrame(tick);
-          }, 2600);
-          return;
-        }
-        hideCard();
-        phase = 'travel';
-        elapsed = 0;
-      }
-
-    } else if (phase === 'travel') {
-      elapsed += dt;
-      const t = Math.min(1, elapsed / 1500);
-      const travelT = easeInOutCubic(t);
-      render(stopIdx + 1, travelT);
-      if (t >= 1) {
-        stopIdx++;
-        phase = 'reveal';
-        elapsed = 0;
-      }
-    }
-
-    mapAnimationId = requestAnimationFrame(tick);
-  }
-
-  document.getElementById('jmap-title-main').textContent = regionName;
-  mapRunning = true;
-  render(1, 0);
-  setTimeout(() => { phase = 'reveal'; mapAnimationId = requestAnimationFrame(tick); }, 600);
 }
 
-function stopGoldenTriangleMap() {
-  if (mapAnimationId) {
-    cancelAnimationFrame(mapAnimationId);
-    mapAnimationId = null;
-  }
-  mapRunning = false;
+window.selectDay = function(index) {
+  // Update itinerary items
+  document.querySelectorAll('.jmap-day-item').forEach((item, i) => {
+    item.classList.toggle('active', i === index);
+  });
+
+  // Update map markers
+  document.querySelectorAll('.jmap-location').forEach((loc, i) => {
+    loc.classList.toggle('active', i === index);
+    const circle = loc.querySelector('circle');
+    if (i === index) {
+      circle.setAttribute('r', '10');
+      circle.setAttribute('stroke-width', '3');
+    } else {
+      circle.setAttribute('r', '6');
+      circle.setAttribute('stroke-width', '2');
+    }
+  });
 }
 
 /* ══ PAGES ══ */
@@ -1977,6 +1574,7 @@ function buildProgress(){
     </div>${i<STEPS.length-1?'<div class="prog-line" id="pl-'+i+'"></div>':''}
   `).join('');
 }
+
 function updateProgress(){
   STEPS.forEach((_,i)=>{
     const el=document.getElementById(`ps-${i}`);
@@ -2103,14 +1701,13 @@ function openDetail(i){
   document.getElementById('detail-badge').style.display='flex';
   document.getElementById('sel-count').textContent=r.name;
 
+  // Show map for selected regions
   const mapContainer = document.getElementById('golden-triangle-map');
   if (r.name === 'Golden Triangle' || r.name === 'Kerala' || r.name === 'Tamil Nadu') {
     mapContainer.classList.add('active');
-    stopGoldenTriangleMap();
-    setTimeout(() => initRegionMap(r.name), 100);
+    initRegionMap(r.name);
   } else {
     mapContainer.classList.remove('active');
-    stopGoldenTriangleMap();
   }
 
   syncAddonsStep();
@@ -2123,7 +1720,6 @@ function closeDetail(){
   document.getElementById('browse-grid-wrap').classList.remove('hidden');
   document.getElementById('wiz-body').classList.add('wide');
   syncBrowseGridChecks();
-  stopGoldenTriangleMap();
   document.getElementById('golden-triangle-map').classList.remove('active');
 }
 
@@ -2242,7 +1838,7 @@ function toggle(arr,i,val,elId){
 function updateBudget(val){
   S.budget=parseInt(val);
   const el=document.getElementById('budget-num');
-  if(el)el.textContent='€'+S.budget.toLocaleString('en-IE');
+  if(el)el.textContent='$'+S.budget.toLocaleString('en-US');
   const slider=document.getElementById('budget-slider');
   if(slider){
     slider.value=S.budget;
