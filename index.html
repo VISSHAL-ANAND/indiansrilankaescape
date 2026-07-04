@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -226,190 +226,127 @@ a{text-decoration:none}
 .dd-custom-input:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(191,149,63,.1)}
 .dd-custom-input::placeholder{color:#c5bdb0}
 
-/* ── Map – Golden Triangle itinerary ── */
+/* ── Golden Triangle itinerary styles ── */
 #golden-triangle-map {
-  display: none;
+  display: block;
   margin-top: 1.8rem;
   border-top: 1px solid var(--cream-dark);
   padding-top: 1.4rem;
   width: 100%;
 }
-#golden-triangle-map.active { display: block; }
 
 #jmap-title {
-  margin-bottom: 1.2rem;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: .4rem;
+  padding: 1.8rem 0;
 }
-#jmap-title-eye {
-  font-size: .58rem;
-  letter-spacing: .28em;
-  text-transform: uppercase;
-  color: var(--gold);
-  margin-bottom: .4rem;
-  font-weight: 500;
-}
+
 #jmap-title-main {
   font-family: var(--serif);
-  font-size: 1.6rem;
+  font-size: 1.8rem;
   font-weight: 300;
   color: var(--ink);
   letter-spacing: .04em;
 }
 
-.jmap-layout {
-  display: grid;
-  grid-template-columns: 1fr 1.2fr;
-  gap: 2rem;
-  background: var(--white);
-  border: 1px solid var(--cream-dark);
-  border-radius: 8px;
-  padding: 1.5rem;
-}
-
-.jmap-itinerary {
+.gt-itinerary {
   display: flex;
   flex-direction: column;
-  gap: .6rem;
+  gap: .85rem;
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 0 0 1.5rem;
 }
 
-.jmap-day-item {
+.gt-day {
   background: var(--cream);
   border: 1px solid var(--cream-dark);
-  border-radius: 6px;
-  padding: .9rem 1rem;
-  cursor: pointer;
-  transition: all .3s;
-  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
 }
-.jmap-day-item:hover {
-  border-color: var(--gold);
+
+.gt-day:nth-child(even) {
   background: var(--white);
 }
-.jmap-day-item.active {
-  border-color: var(--gold);
-  background: var(--gold-dim);
-  border-width: 2px;
-  padding: .85rem .95rem;
+
+.gt-day-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+  padding: 1rem 1.2rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  font-family: inherit;
 }
 
-.jmap-day-badge {
-  display: inline-block;
+.gt-day-badge {
+  flex: 0 0 auto;
   background: var(--ink);
   color: var(--cream);
-  font-size: .55rem;
-  letter-spacing: .15em;
-  text-transform: uppercase;
-  padding: .25rem .6rem;
-  border-radius: 3px;
-  font-weight: 600;
-  margin-bottom: .4rem;
-}
-.jmap-day-item.active .jmap-day-badge {
-  background: var(--gold);
-  color: var(--ink);
+  font-size: .75rem;
+  font-weight: 700;
+  padding: .55rem .9rem;
+  border-radius: 999px;
+  white-space: nowrap;
 }
 
-.jmap-day-title {
-  font-size: .9rem;
-  font-weight: 500;
+.gt-day-text {
+  flex: 1 1 auto;
+}
+
+.gt-day-title {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 600;
   color: var(--ink);
-  margin-bottom: .2rem;
   line-height: 1.3;
 }
 
-.jmap-day-subtitle {
-  font-size: .7rem;
-  color: var(--ink-soft);
-  line-height: 1.4;
+.gt-chevron {
+  flex: 0 0 auto;
+  width: 18px;
+  height: 18px;
+  color: var(--ink);
+  transition: transform 0.25s ease;
 }
 
-.jmap-visual {
-  position: relative;
-  background: linear-gradient(135deg, #faf9f7 0%, #f5f3ef 100%);
-  border-radius: 6px;
-  padding: 1rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.gt-day.open .gt-chevron {
+  transform: rotate(180deg);
 }
 
-#jmap-map-container {
-  width: 100%;
-  height: 100%;
-  position: relative;
+.gt-day-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.35s ease;
 }
 
-#jmap-svg {
-  width: 100%;
-  height: auto;
-  max-height: 400px;
-}
-
-.jmap-location {
-  cursor: pointer;
-  transition: all .3s;
-}
-
-.jmap-location circle {
-  transition: all .3s;
-}
-
-.jmap-location:hover circle {
-  r: 8;
-  fill: var(--gold-mid);
-}
-
-.jmap-location text {
-  font-family: var(--sans);
-  font-size: 9px;
-  fill: var(--ink);
-  pointer-events: none;
-}
-
-.jmap-location.start circle {
-  fill: #7aab8f;
-  stroke: #5a8b6f;
-}
-
-.jmap-location.end circle {
-  fill: var(--gold);
-  stroke: var(--gold-mid);
-}
-
-.jmap-location.stop circle {
-  fill: var(--ink-mid);
-  stroke: var(--ink);
-}
-
-.jmap-location.active circle {
-  r: 10;
-  fill: var(--gold);
-  stroke: var(--gold-mid);
-  stroke-width: 3;
-}
-
-.jmap-route-line {
-  fill: none;
-  stroke: var(--ink-soft);
-  stroke-width: 1.5;
-  stroke-dasharray: 5, 5;
-  opacity: 0.5;
-}
-
-.jmap-legend {
-  position: absolute;
-  bottom: 1rem;
-  left: 1rem;
-  display: flex;
-  gap: 1rem;
-  font-size: .65rem;
+.gt-day-content-inner {
+  padding: 0 1.2rem 1rem;
+  font-size: .95rem;
+  line-height: 1.8;
   color: var(--ink-soft);
 }
 
-.jmap-legend-item {
-  display: flex;
-  align-items: center;
-  gap: .4rem;
+.gt-hotel {
+  margin-top: 1rem;
+  font-size: .82rem;
+  font-weight: 700;
+  letter-spacing: .08em;
+  color: var(--ink);
+  text-transform: uppercase;
 }
+
+.gt-day.open .gt-day-content {
+  max-height: 1000px;
+}
+
 
 .jmap-legend-dot {
   width: 8px;
@@ -748,22 +685,111 @@ a{text-decoration:none}
           </div>
 
           <div class="dd-bottom">
-            <!-- ═══ MAP – Golden Triangle itinerary ═══ -->
+            <!-- ═══ Golden Triangle itinerary section ═══ -->
             <div id="golden-triangle-map">
               <div id="jmap-title">
-                <div id="jmap-title-eye">Your journey</div>
                 <div id="jmap-title-main">The Golden Triangle</div>
               </div>
-              <div class="jmap-layout">
-                <div class="jmap-itinerary" id="jmap-itinerary"></div>
-                <div class="jmap-visual">
-                  <div id="jmap-map-container">
-                    <svg id="jmap-svg" viewBox="0 0 400 300"></svg>
+              <div class="gt-itinerary" id="gt-itinerary">
+                <div class="gt-day open" data-day="1">
+                  <button class="gt-day-header" type="button">
+                    <span class="gt-day-badge">Day 1</span>
+                    <span class="gt-day-text">
+                      <p class="gt-day-title">Arrival in the Capital – Welcome to Delhi</p>
+                    </span>
+                    <svg class="gt-chevron" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  </button>
+                  <div class="gt-day-content">
+                    <div class="gt-day-content-inner">Upon arrival at New Delhi International Airport, you will be warmly greeted by our representative and escorted to your hotel located about 15 km away, a drive of approximately 30 minutes. Check in and relax after your journey. Depending on your arrival time, enjoy a leisurely stroll around the hotel or simply unwind and prepare for the adventures ahead.</div>
+                  </div>
+                </div>
+                <div class="gt-day" data-day="2">
+                  <button class="gt-day-header" type="button">
+                    <span class="gt-day-badge">Day 2</span>
+                    <span class="gt-day-text">
+                      <p class="gt-day-title">Old Meets New – Discover Delhi's Heritage</p>
+                    </span>
+                    <svg class="gt-chevron" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  </button>
+                  <div class="gt-day-content">
+                    <div class="gt-day-content-inner">After breakfast, embark on a full-day guided sightseeing tour of Delhi, blending Mughal grandeur with British-era elegance. Visit Jama Masjid, one of India’s largest mosques, and take a rickshaw ride through the bustling charm of Chandni Chowk. Continue to UNESCO-listed monuments such as the Red Fort and Humayun’s Tomb. Drive past the President’s House, Parliament, and India Gate before paying homage at Raj Ghat. Conclude with a visit to the iconic Qutub Minar.</div>
+                  </div>
+                </div>
+                <div class="gt-day" data-day="3">
+                  <button class="gt-day-header" type="button">
+                    <span class="gt-day-badge">Day 3</span>
+                    <span class="gt-day-text">
+                      <p class="gt-day-title">Journey to the Taj – Delhi to Agra</p>
+                    </span>
+                    <svg class="gt-chevron" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  </button>
+                  <div class="gt-day-content">
+                    <div class="gt-day-content-inner">After breakfast, drive to Agra, covering about 240 km in roughly four and a half hours. Upon arrival, check in at your hotel and later visit Agra Fort, a mighty UNESCO World Heritage Site. In the evening, witness the ethereal beauty of the Taj Mahal, glowing under the sunset hues. Spend time admiring its intricate architecture and serene gardens before returning to your hotel.<div class="gt-hotel">The Oberoi Amarvilas, Agra</div></div>
+                  </div>
+                </div>
+                <div class="gt-day" data-day="4">
+                  <button class="gt-day-header" type="button">
+                    <span class="gt-day-badge">Day 4</span>
+                    <span class="gt-day-text">
+                      <p class="gt-day-title">Mughal Marvels & Village Charms – Agra to Ranthambore via Fatehpur Sikri and Abhaneri</p>
+                    </span>
+                    <svg class="gt-chevron" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  </button>
+                  <div class="gt-day-content">
+                    <div class="gt-day-content-inner">After breakfast, travel to Ranthambore, an enchanting drive of about 290 km taking around five to six hours. Stop at Fatehpur Sikri, the deserted Mughal capital known for its grand architecture, and continue to Abhaneri to see the famous Chand Baori stepwell and Harshat Mata Temple. Arrive in Ranthambore by evening and check in at your lodge surrounded by nature.</div>
+                  </div>
+                </div>
+                <div class="gt-day" data-day="5">
+                  <button class="gt-day-header" type="button">
+                    <span class="gt-day-badge">Day 5</span>
+                    <span class="gt-day-text">
+                      <p class="gt-day-title">In the Realm of the Tiger – Ranthambore Safari</p>
+                    </span>
+                    <svg class="gt-chevron" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  </button>
+                  <div class="gt-day-content">
+                    <div class="gt-day-content-inner">Rise early for your wildlife adventure in Ranthambore National Park. Join a morning jeep or canter safari accompanied by an expert naturalist, spotting tigers, leopards, deer, crocodiles, and vibrant birdlife. Return for breakfast and leisure time, followed by lunch. In the afternoon, set out again for another safari through the park's varied landscapes of lakes, ruins, and forests.</div>
+                  </div>
+                </div>
+                <div class="gt-day" data-day="6">
+                  <button class="gt-day-header" type="button">
+                    <span class="gt-day-badge">Day 6</span>
+                    <span class="gt-day-text">
+                      <p class="gt-day-title">Royal Roads to Jaipur – The Pink City Beckons</p>
+                    </span>
+                    <svg class="gt-chevron" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  </button>
+                  <div class="gt-day-content">
+                    <div class="gt-day-content-inner">After breakfast, drive to Jaipur, the royal capital of Rajasthan, covering a journey of 170 km in about four hours. Upon arrival, check in at your hotel and spend the evening exploring Jaipur's lively markets filled with colorful crafts, jewels, and textiles or simply enjoy a relaxed evening at the hotel.</div>
+                  </div>
+                </div>
+                <div class="gt-day" data-day="7">
+                  <button class="gt-day-header" type="button">
+                    <span class="gt-day-badge">Day 7</span>
+                    <span class="gt-day-text">
+                      <p class="gt-day-title">Royalty and Astronomy – Exploring Jaipur's Splendors</p>
+                    </span>
+                    <svg class="gt-chevron" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  </button>
+                  <div class="gt-day-content">
+                    <div class="gt-day-content-inner">After breakfast, set out on a full-day tour of Jaipur. Visit the majestic Amber Fort, ascending the hilltop by jeep or elephant ride. Continue to admire Hawa Mahal, the Palace of Winds, followed by the elegant City Palace complex. Explore Jantar Mantar, the UNESCO-listed royal observatory known for its precise astronomical instruments. Spend your evening shopping or relaxing.</div>
+                  </div>
+                </div>
+                <div class="gt-day" data-day="8">
+                  <button class="gt-day-header" type="button">
+                    <span class="gt-day-badge">Day 8</span>
+                    <span class="gt-day-text">
+                      <p class="gt-day-title">Farewell Journey – Jaipur to Delhi Departure</p>
+                    </span>
+                    <svg class="gt-chevron" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  </button>
+                  <div class="gt-day-content">
+                    <div class="gt-day-content-inner">After breakfast, drive back to Delhi, a distance of about 290 km taking four to five hours. Upon arrival, transfer to the airport or railway station for your onward journey, carrying unforgettable memories of India's vibrant culture, royal heritage, and wilderness encounters.</div>
                   </div>
                 </div>
               </div>
             </div>
-            <!-- ═══ end map ═══ -->
+            <!-- ═══ end itinerary section ═══ -->
           </div>
         </div>
 
@@ -1424,95 +1450,78 @@ function syncAddonsStep() {
 
 /* ══ MAP ══ */
 function initRegionMap(regionName) {
-  const ROUTES = {
-    'Golden Triangle': {
-      stops: [
-        {id: 'delhi', name: 'Delhi', day: 'Day 1', subtitle: 'One night', desc: 'Arrive Stockholm, Sweden', x: 200, y: 50, type: 'start'},
-        {id: 'agra', name: 'Agra', day: 'Day 2', subtitle: 'One night', desc: 'Stockholm', x: 280, y: 100, type: 'stop'},
-        {id: 'fatehpur', name: 'Fatehpur Sikri', day: 'Day 3', subtitle: 'One night', desc: 'Stockholm', x: 240, y: 150, type: 'stop'},
-        {id: 'jaipur', name: 'Jaipur', day: 'Day 4', subtitle: 'One night', desc: 'Stockholm – Rovaniemi, Finland', x: 150, y: 120, type: 'stop'},
-        {id: 'ranthambore', name: 'Ranthambore', day: 'Day 5', subtitle: 'One night', desc: 'Rovaniemi', x: 120, y: 200, type: 'stop'},
-        {id: 'delhi2', name: 'Delhi', day: 'Day 6', subtitle: 'Departure', desc: 'Rovaniemi', x: 200, y: 50, type: 'end'}
-      ]
-    },
-    'Kerala': {
-      stops: [
-        {id: 'kochi', name: 'Kochi', day: 'Day 1', subtitle: 'One night', desc: 'Arrival in Kochi', x: 120, y: 100, type: 'start'},
-        {id: 'alleppey', name: 'Alleppey', day: 'Days 2-3', subtitle: 'Two nights', desc: 'Backwater Houseboat', x: 180, y: 150, type: 'stop'},
-        {id: 'munnar', name: 'Munnar', day: 'Day 4', subtitle: 'One night', desc: 'Tea Garden Hills', x: 240, y: 80, type: 'stop'},
-        {id: 'thekkady', name: 'Thekkady', day: 'Day 5', subtitle: 'One night', desc: 'Wildlife & Spice Trails', x: 300, y: 140, type: 'stop'},
-        {id: 'kovalam', name: 'Kovalam', day: 'Days 6-7', subtitle: 'Two nights', desc: 'Coastal Finale', x: 340, y: 220, type: 'end'}
-      ]
-    },
-    'Tamil Nadu': {
-      stops: [
-        {id: 'chennai', name: 'Chennai', day: 'Day 1', subtitle: 'One night', desc: 'Tamil Nadu Arrival', x: 320, y: 80, type: 'start'},
-        {id: 'mahabalipuram', name: 'Mahabalipuram', day: 'Day 2', subtitle: 'One night', desc: 'Shore Temple Coast', x: 300, y: 130, type: 'stop'},
-        {id: 'madurai', name: 'Madurai', day: 'Day 3', subtitle: 'One night', desc: 'Temple City Rituals', x: 240, y: 180, type: 'stop'},
-        {id: 'kodaikanal', name: 'Kodaikanal', day: 'Day 4', subtitle: 'One night', desc: 'Hill Station Escape', x: 170, y: 140, type: 'stop'},
-        {id: 'rameswaram', name: 'Rameswaram', day: 'Day 5', subtitle: 'Departure', desc: 'Pilgrim Island Finale', x: 280, y: 240, type: 'end'}
-      ]
-    }
+  const itineraries = {
+    'Golden Triangle': [
+      {
+        day: 'Day 1',
+        title: 'Arrival in the Capital – Welcome to Delhi',
+        content: 'Upon arrival at New Delhi International Airport, you will be warmly greeted by our representative and escorted to your hotel located about 15 km away, a drive of approximately 30 minutes. Check in and relax after your journey. Depending on your arrival time, enjoy a leisurely stroll around the hotel or simply unwind and prepare for the adventures ahead.'
+      },
+      {
+        day: 'Day 2',
+        title: 'Old Meets New – Discover Delhi\'s Heritage',
+        content: 'After breakfast, embark on a full-day guided sightseeing tour of Delhi, blending Mughal grandeur with British-era elegance. Visit Jama Masjid, one of India\'s largest mosques, and take a rickshaw ride through the bustling charm of Chandni Chowk. Continue to UNESCO-listed monuments such as the Red Fort and Humayun\'s Tomb. Drive past the President\'s House, Parliament, and India Gate before paying homage at Raj Ghat. Conclude with a visit to the iconic Qutub Minar.'
+      },
+      {
+        day: 'Day 3',
+        title: 'Journey to the Taj – Delhi to Agra',
+        content: 'After breakfast, drive to Agra, covering about 240 km in roughly four and a half hours. Upon arrival, check in at your hotel and later visit Agra Fort, a mighty UNESCO World Heritage Site. In the evening, witness the ethereal beauty of the Taj Mahal, glowing under the sunset hues. Spend time admiring its intricate architecture and serene gardens before returning to your hotel.'
+      },
+      {
+        day: 'Day 4',
+        title: 'Mughal Marvels & Village Charms – Agra to Ranthambore via Fatehpur Sikri and Abhaneri',
+        content: 'After breakfast, travel to Ranthambore, an enchanting drive of about 290 km taking around five to six hours. Stop at Fatehpur Sikri, the deserted Mughal capital known for its grand architecture, and continue to Abhaneri to see the famous Chand Baori stepwell and Harshat Mata Temple. Arrive in Ranthambore by evening and check in at your lodge surrounded by nature.'
+      },
+      {
+        day: 'Day 5',
+        title: 'In the Realm of the Tiger – Ranthambore Safari',
+        content: 'Rise early for your wildlife adventure in Ranthambore National Park. Join a morning jeep or canter safari accompanied by an expert naturalist, spotting tigers, leopards, deer, crocodiles, and vibrant birdlife. Return for breakfast and leisure time, followed by lunch. In the afternoon, set out again for another safari through the park\'s varied landscapes of lakes, ruins, and forests.'
+      },
+      {
+        day: 'Day 6',
+        title: 'Royal Roads to Jaipur – The Pink City Beckons',
+        content: 'After breakfast, drive to Jaipur, the royal capital of Rajasthan, covering a journey of 170 km in about four hours. Upon arrival, check in at your hotel and spend the evening exploring Jaipur\'s lively markets filled with colorful crafts, jewels, and textiles or simply enjoy a relaxed evening at the hotel.'
+      },
+      {
+        day: 'Day 7',
+        title: 'Royalty and Astronomy – Exploring Jaipur\'s Splendors',
+        content: 'After breakfast, set out on a full-day tour of Jaipur. Visit the majestic Amber Fort, ascending the hilltop by jeep or elephant ride. Continue to admire Hawa Mahal, the Palace of Winds, followed by the elegant City Palace complex. Explore Jantar Mantar, the UNESCO-listed royal observatory known for its precise astronomical instruments. Spend your evening shopping or relaxing.'
+      },
+      {
+        day: 'Day 8',
+        title: 'Farewell Journey – Jaipur to Delhi Departure',
+        content: 'After breakfast, drive back to Delhi, a distance of about 290 km taking four to five hours. Upon arrival, transfer to the airport or railway station for your onward journey, carrying unforgettable memories of India\'s vibrant culture, royal heritage, and wilderness encounters.'
+      }
+    ]
   };
 
-  const routeData = ROUTES[regionName] || ROUTES['Golden Triangle'];
-  const stops = routeData.stops;
-  
-  // Build itinerary list
-  const itineraryEl = document.getElementById('jmap-itinerary');
-  if (itineraryEl) {
-    itineraryEl.innerHTML = stops.map((stop, i) => `
-      <div class="jmap-day-item ${i === 0 ? 'active' : ''}" data-index="${i}" onclick="selectDay(${i})">
-        <div class="jmap-day-badge">${stop.day}</div>
-        <div class="jmap-day-title">${stop.desc}</div>
-        <div class="jmap-day-subtitle">${stop.subtitle}</div>
+  const itineraryEl = document.getElementById('gt-itinerary');
+  if (!itineraryEl) return;
+
+  const items = itineraries[regionName] || itineraries['Golden Triangle'];
+  itineraryEl.innerHTML = items.map((item, i) => `
+    <div class="gt-day ${i === 0 ? 'open' : ''}" data-day="${i}">
+      <button class="gt-day-header" type="button">
+        <span class="gt-day-badge">${item.day}</span>
+        <span class="gt-day-text">
+          <p class="gt-day-title">${item.title}</p>
+        </span>
+        <svg class="gt-chevron" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <div class="gt-day-content">
+        <div class="gt-day-content-inner">${item.content}</div>
       </div>
-    `).join('');
-  }
+    </div>
+  `).join('');
 
-  // Build SVG map
-  const svg = document.getElementById('jmap-svg');
-  if (!svg) return;
-  
-  svg.innerHTML = '';
-  
-  // Draw route lines
-  for (let i = 0; i < stops.length - 1; i++) {
-    const from = stops[i];
-    const to = stops[i + 1];
-    const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
-    line.setAttribute('x1', from.x);
-    line.setAttribute('y1', from.y);
-    line.setAttribute('x2', to.x);
-    line.setAttribute('y2', to.y);
-    line.classList.add('jmap-route-line');
-    svg.appendChild(line);
-  }
-
-  // Draw location markers
-  stops.forEach((stop, i) => {
-    const g = document.createElementNS('http://www.w3.org/2000/svg', 'g');
-    g.classList.add('jmap-location', stop.type);
-    if (i === 0) g.classList.add('active');
-    g.setAttribute('data-index', i);
-    g.onclick = () => selectDay(i);
-
-    const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
-    circle.setAttribute('cx', stop.x);
-    circle.setAttribute('cy', stop.y);
-    circle.setAttribute('r', i === 0 ? '10' : '6');
-    circle.setAttribute('stroke-width', i === 0 ? '3' : '2');
-
-    const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
-    text.setAttribute('x', stop.x);
-    text.setAttribute('y', stop.y - 15);
-    text.setAttribute('text-anchor', 'middle');
-    text.setAttribute('font-weight', '500');
-    text.textContent = stop.name;
-
-    g.appendChild(circle);
-    g.appendChild(text);
-    svg.appendChild(g);
+  itineraryEl.querySelectorAll('.gt-day-header').forEach(header => {
+    header.addEventListener('click', () => {
+      const day = header.closest('.gt-day');
+      if (!day) return;
+      const isOpen = day.classList.contains('open');
+      itineraryEl.querySelectorAll('.gt-day').forEach(d => d.classList.remove('open'));
+      if (!isOpen) day.classList.add('open');
+    });
   });
 }
 
