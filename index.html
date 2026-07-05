@@ -241,25 +241,40 @@ a{text-decoration:none}
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: .4rem;
+  gap: .3rem;
   padding: 1.8rem 0;
+  max-width: 1180px;
+  text-align: center;
 }
 
 #jmap-title-main {
   font-family: var(--serif);
-  font-size: 1.8rem;
-  font-weight: 300;
-  color: var(--ink);
-  letter-spacing: .04em;
+  font-size: 1.9rem;
+  font-weight: 600;
+  color: var(--gold);
+  letter-spacing: .02em;
 }
 
 .gt-itinerary {
   display: flex;
   flex-direction: column;
-  gap: .85rem;
-  max-width: 720px;
-  margin: 0 auto;
-  padding: 0 0 1.5rem;
+  gap: .7rem;
+  max-width: 620px;
+  margin: 0 0 0 3rem;
+  padding: 0 0 1rem;
+}
+
+/* Two-column layout: left itinerary, right map image */
+.gt-layout{display:grid;grid-template-columns:1fr 520px;gap:2.2rem;align-items:start;max-width:1180px;margin:0 auto;padding:0 3rem}
+.gt-left{min-width:0}
+.gt-right{display:flex;align-items:flex-start;justify-content:center}
+.gt-map{width:100%;max-width:520px}
+.gt-map img{width:100%;height:auto;border-radius:8px;box-shadow:0 10px 24px rgba(14,12,8,.08);display:block}
+
+@media(max-width:980px){
+  .gt-layout{grid-template-columns:1fr;gap:1rem;padding:0 1.5rem}
+  .gt-itinerary{margin-left:0;max-width:100%}
+  .gt-right{order:2}
 }
 
 .gt-day {
@@ -276,9 +291,9 @@ a{text-decoration:none}
 .gt-day-header {
   display: flex;
   align-items: center;
-  gap: 1rem;
+  gap: .8rem;
   width: 100%;
-  padding: 1rem 1.2rem;
+  padding: .75rem .9rem;
   background: none;
   border: none;
   cursor: pointer;
@@ -290,9 +305,9 @@ a{text-decoration:none}
   flex: 0 0 auto;
   background: var(--ink);
   color: var(--cream);
-  font-size: .75rem;
+  font-size: .68rem;
   font-weight: 700;
-  padding: .55rem .9rem;
+  padding: .42rem .7rem;
   border-radius: 999px;
   white-space: nowrap;
 }
@@ -303,10 +318,10 @@ a{text-decoration:none}
 
 .gt-day-title {
   margin: 0;
-  font-size: 1rem;
+  font-size: .96rem;
   font-weight: 600;
   color: var(--ink);
-  line-height: 1.3;
+  line-height: 1.25;
 }
 
 .gt-chevron {
@@ -688,9 +703,11 @@ a{text-decoration:none}
             <!-- ═══ Golden Triangle itinerary section ═══ -->
             <div id="golden-triangle-map">
               <div id="jmap-title">
-                <div id="jmap-title-main">The Golden Triangle</div>
+                <div id="jmap-title-main">The Journey Through the Golden Triangle</div>
               </div>
-              <div class="gt-itinerary" id="gt-itinerary">
+              <div class="gt-layout">
+                <div class="gt-left">
+                  <div class="gt-itinerary" id="gt-itinerary">
                 <div class="gt-day open" data-day="1">
                   <button class="gt-day-header" type="button">
                     <span class="gt-day-badge">Day 1</span>
@@ -785,6 +802,13 @@ a{text-decoration:none}
                   </button>
                   <div class="gt-day-content">
                     <div class="gt-day-content-inner">After breakfast, drive back to Delhi, a distance of about 290 km taking four to five hours. Upon arrival, transfer to the airport or railway station for your onward journey, carrying unforgettable memories of India's vibrant culture, royal heritage, and wilderness encounters.</div>
+                  </div>
+                </div>
+                </div>
+                </div>
+                <div class="gt-right">
+                  <div class="gt-map">
+                    <img id="gt-map-img" src="./ChatGPT%20Image%20Jul%205%2C%202026%2C%2005_13_06%20PM.png" alt="Golden Triangle map">
                   </div>
                 </div>
               </div>
